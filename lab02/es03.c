@@ -38,9 +38,9 @@ if (argc != 3) {
     exit (3);
   }
 
-
-
   ls_r(argv[1] , &statbuf, argv[2]);
+  
+  return 0;
 }
 
 void ls_r(char* previous_path, struct stat * p_statbuf, char* write_path){	
@@ -51,7 +51,7 @@ void ls_r(char* previous_path, struct stat * p_statbuf, char* write_path){
 
 
   if ( opendir(write_path) == NULL){
-    mkdir(write_path, 0755);
+    mkdir(write_path, S_IRWXU | S_IRWXG | S_IRWXO);
   }
 
   /* Directory */
@@ -61,10 +61,10 @@ void ls_r(char* previous_path, struct stat * p_statbuf, char* write_path){
   }
 
   while ( (dirp = readdir(dp)) != NULL) {
+    
     sprintf (fullNamesource, "%s/%s", previous_path, dirp->d_name);
     sprintf (fullNamedest, "%s/%s", write_path, dirp->d_name);
     fprintf(stdout, "%s\n", fullNamesource);
-
 
     if (lstat(fullNamesource, p_statbuf) < 0 ) {
       fprintf (stderr, "Error.\n");
@@ -72,12 +72,11 @@ void ls_r(char* previous_path, struct stat * p_statbuf, char* write_path){
     }
 
     if (S_ISDIR(p_statbuf->st_mode) == 0) {
-      //fprintf(stdout, "Trovato file lo copio %s\n", fullNamesource);
       cp_file(fullNamesource, fullNamedest);
     }else if(strcmp(".",dirp->d_name)!=0 && strcmp("..", dirp->d_name)!=0){
-            //fprintf(stdout, "Trovato direttorio lo copio%s\n", fullNamesource);
-            ls_r(fullNamesource, p_statbuf, fullNamedest);
-          }
+      ls_r(fullNamesource, p_statbuf, fullNamedest);
+    }
+    
   }
 
   if (closedir(dp) < 0) {
@@ -96,7 +95,7 @@ void cp_file(char* fnamesource, char * fnamedest){
     exit(6);
   }
 
-  if( (fout=open(fnamedest, O_RDWR)) ==-1){
+  if( (fout=open(fnamedest, O_RDWR | O_CREAT)) ==-1){
     exit(6);
   }
 
