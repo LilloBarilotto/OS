@@ -16,56 +16,40 @@
 
 int main(){
 
-  //P1
-  printf("P1\n");
+  printf("P1 %d\n", getpid());;
 
   if( fork() ){
-  	//P2
-  	printf("P2\n");
+  	printf("P2 %d\n", getpid());
   	
   	if( fork() ){
-  		//P4
-  		sleep(10);
-		printf("P4\n");
+		printf("P4 %d\n", getpid());
 		//waitpid...
   	}
   	else{
-  		//P5
-  		sleep(15);
-  		printf("P5\n");
+  		printf("P5 %d\n", getpid());
   		exit(0);
   	}
-	sleep(20);
   	wait(NULL);
   	
-  	//P7
-  	printf("P7\n");
-  	sleep(12);
+  	printf("P7 %d\n", getpid());
   	wait(NULL);
   	//waitpid(pid);
   }
   else{
-  	sleep(5);
   	//P3
-  	printf("P3\n");
+  	printf("P3 %d\n", getpid());
   	
   	if( !fork() ){
-  		sleep(20);
-  		//P6
-  		printf("P6\n");
+  		printf("P6 %d\n", getpid());
   		exit(0);
   	}
-  	sleep(20);
   	wait(NULL);
   	
-  	//P8
-  	sleep(10);
-  	printf("P8\n");
+  	printf("P8 %d\n", getpid());;
   	exit(0);
   }
   
-  //P9
-  printf("P9\n");
+  printf("P9 %d\n", getpid());
   
   return 0;
 }
