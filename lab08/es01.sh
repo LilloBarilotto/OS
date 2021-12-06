@@ -1,7 +1,6 @@
 #!/bin/bash
 
-#Commento del cazzo
-
+#RICORDA QUESTE COSE SOTTO
 # $* indica l’intera lista (stringa) dei parametri (non include il nome dello script)
 # $# memorizza il numero di parametri (nome dello script escluso)
 # $$ memorizza il PID del processo
