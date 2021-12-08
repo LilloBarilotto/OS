@@ -4,5 +4,5 @@ Letteralmente il file che mi crea è strano, in pratica, essendo più file, la g
 Vorrei capire quindi se attraverso la grep è possibile aggiungere uno \n ad ognuna delle righe.  
 
 
-Es4
+Es4  
 Non va, penso sia la gestione dell'array e del relativo index. Stay tuned che forse lo aggiusto!
