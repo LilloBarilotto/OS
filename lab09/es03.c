@@ -148,6 +148,15 @@ int main(){
  sem_destroy(H);
  sem_destroy(I);
  sem_destroy(A);
+	
+ free(BCD);
+ free(EF);
+ free(G);
+ free(H);
+ free(I);
+ free(A);
+ 
+ free(t);
 
 return 0;
 }
