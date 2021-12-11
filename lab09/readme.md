@@ -57,4 +57,4 @@ E
 G
 I"
   
-Come si può vedere in 2 stampe sembra che F sia riuscito a "rubare" un signal a E, nella stampa 2 si vede "FF"  e in 4 "EE".
+Come si può vedere in 2 stampe sembra che F sia riuscito a "rubare" un signal a E, nella stampa 2 si vede "FF"  e in 4 "EE", sembrerebbe che F (o E) riesca a fare 2 cicli e 2 wait soddisfandoli entrambi prima che entri in gioco F.
