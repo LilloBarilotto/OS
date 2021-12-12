@@ -12,7 +12,7 @@
 //Quante volte vuoi ripetere le stampe
 
 
-sem_t *BCD, *EF, *G, *H, *I, *A;
+sem_t *A, *B, *C, *D, *E, *F, *G, *H, *I;
 
 void * pA(void *par){
 
@@ -22,9 +22,9 @@ void * pA(void *par){
 		printf("A\n");
 		sleep(5);
 		
-		sem_post(BCD);
-		sem_post(BCD);
-		sem_post(BCD);
+		sem_post(B);
+		sem_post(C);
+		sem_post(D);
 	}
 	
 	pthread_exit((void*) NULL);
@@ -34,7 +34,7 @@ void * pA(void *par){
 void * pB(void *par){
 	
 	for(int i=0; i<R; i++){
-		sem_wait(BCD);
+		sem_wait(B);
 		
 		printf("B\n");
 		
@@ -47,12 +47,12 @@ void * pB(void *par){
 //tratto centrale C->E,F->G
 void * pC(void *par){
 	for(int i=0; i<R; i++){
-		sem_wait(BCD);
+		sem_wait(C);
 
 		printf("C\n");
 		
-		sem_post(EF);
-		sem_post(EF);
+		sem_post(E);
+		sem_post(F);
 	}
 
  	pthread_exit((void*) NULL);
@@ -61,7 +61,7 @@ void * pC(void *par){
 void * pE(void *par){
 	
 	for(int i=0; i<R; i++){
-		sem_wait(EF);
+		sem_wait(E);
 		
 		printf("E\n");
 		
@@ -74,7 +74,7 @@ void * pE(void *par){
 void * pF(void *par){
 	
 	for(int i=0; i<R; i++){
-		sem_wait(EF);
+		sem_wait(F);
 		
 		printf("F\n");
 		
@@ -102,7 +102,7 @@ void * pG(void *par){
 void * pD(void *par){
 
 	for(int i=0; i<R; i++){
-		sem_wait(BCD);
+		sem_wait(D);
 		
 		printf("D\n");
 		
@@ -141,15 +141,21 @@ void pI(void *par){
 int main(){
  pthread_t *t;
  
- BCD=(sem_t *) malloc(sizeof(sem_t));
- EF=(sem_t *) malloc(sizeof(sem_t));
+ A=(sem_t *) malloc(sizeof(sem_t));
+ B=(sem_t *) malloc(sizeof(sem_t));
+ C=(sem_t *) malloc(sizeof(sem_t));
+ D=(sem_t *) malloc(sizeof(sem_t));
+ E=(sem_t *) malloc(sizeof(sem_t));
+ F=(sem_t *) malloc(sizeof(sem_t));
  G=(sem_t *) malloc(sizeof(sem_t));
  H=(sem_t *) malloc(sizeof(sem_t));
  I=(sem_t *) malloc(sizeof(sem_t));
- A=(sem_t *) malloc(sizeof(sem_t));
  
- sem_init(BCD,0,0);
- sem_init(EF,0,0);
+ sem_init(B,0,0);
+ sem_init(C,0,0);
+ sem_init(D,0,0);
+ sem_init(E,0,0);
+ sem_init(F,0,0);
  sem_init(G,0,0);
  sem_init(H,0,0);
  sem_init(I,0,0);
@@ -168,15 +174,21 @@ int main(){
  
  pI(NULL);
 
- sem_destroy(BCD);
- sem_destroy(EF);
+ sem_destroy(B);
+ sem_destroy(C);
+ sem_destroy(D);
+ sem_destroy(E);
+ sem_destroy(F);
  sem_destroy(G);
  sem_destroy(H);
  sem_destroy(I);
  sem_destroy(A);
  
- free(BCD);
- free(EF);
+ free(B);
+ free(C);
+ free(D);
+ free(E);
+ free(F);
  free(G);
  free(H);
  free(I);
